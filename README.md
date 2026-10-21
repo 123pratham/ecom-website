@@ -165,7 +165,7 @@ GitHub: https://github.com/123pratham/ecom-website
 **Pratham Sahu**
 
 GitHub: https://github.com/123pratham
-
+Live Demo: https://velora-stop.netlify.app
 ---
 
 This project was developed to explore modern frontend development using Next.js, React, and TypeScript.
