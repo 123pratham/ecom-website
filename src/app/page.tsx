@@ -1,103 +1,148 @@
 import Image from "next/image";
+import Link from "next/link";
+import Marquee from "@/components/Marquee";
+import ProductCard from "@/components/ProductCard";
+import { getFeatured } from "@/data/products";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const featured = getFeatured();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  return (
+    <>
+      <section className="relative min-h-[92vh] overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=2000&q=80"
+          alt="Velora campaign"
+          fill
+          priority
+          className="object-cover object-[center_20%]"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1c1917]/78 via-[#1c1917]/40 to-[#1c1917]/15" />
+        <div className="relative mx-auto flex min-h-[92vh] max-w-7xl flex-col justify-end px-4 pb-20 pt-28 sm:px-6 lg:px-8">
+          <p className="animate-fade-up text-xs tracking-[0.32em] uppercase text-white/80">
+            Autumn / Winter 26
+          </p>
+          <h1 className="animate-fade-up delay-1 mt-4 max-w-2xl font-serif text-5xl leading-[0.95] text-white sm:text-7xl lg:text-8xl">
+            Clothes that stay.
+          </h1>
+          <p className="animate-fade-up delay-2 mt-5 max-w-md text-sm leading-7 text-white/80 sm:text-base">
+            Tailored coats, silk dresses, merino knits — a dummy collection for
+            men and women, designed to feel like a real boutique.
+          </p>
+          <div className="animate-fade-up delay-3 mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/shop?category=women"
+              className="bg-white px-6 py-3 text-sm tracking-[0.18em] uppercase text-foreground transition-transform hover:-translate-y-0.5"
+            >
+              Shop women
+            </Link>
+            <Link
+              href="/shop?category=men"
+              className="border border-white/70 px-6 py-3 text-sm tracking-[0.18em] uppercase text-white transition-transform hover:-translate-y-0.5"
+            >
+              Shop men
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <Marquee />
+
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mb-12 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <p className="text-xs tracking-[0.28em] uppercase text-muted">
+              Featured
+            </p>
+            <h2 className="mt-2 font-serif text-4xl sm:text-5xl">The edit</h2>
+          </div>
+          <Link
+            href="/shop"
+            className="text-sm tracking-[0.18em] uppercase underline-offset-4 hover:underline"
+          >
+            View all
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
+          {featured.map((product, index) => (
+            <ProductCard key={product.id} product={product} index={index} />
+          ))}
+        </div>
+      </section>
+
+      <section className="px-4 pb-20 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-2">
+          <Link
+            href="/shop?category=women"
+            className="group relative min-h-[420px] overflow-hidden"
           >
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1400&q=80"
+              alt="Women collection"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <div className="absolute inset-0 bg-[#1c1917]/25" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+              <p className="text-xs tracking-[0.3em] uppercase">Collection</p>
+              <h3 className="mt-2 font-serif text-5xl">Women</h3>
+              <span className="mt-4 border-b border-white/80 pb-1 text-xs tracking-[0.2em] uppercase">
+                Explore
+              </span>
+            </div>
+          </Link>
+          <Link
+            href="/shop?category=men"
+            className="group relative min-h-[420px] overflow-hidden"
           >
-            Read our docs
-          </a>
+            <Image
+              src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=1400&q=80"
+              alt="Men collection"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+            <div className="absolute inset-0 bg-[#1c1917]/25" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+              <p className="text-xs tracking-[0.3em] uppercase">Collection</p>
+              <h3 className="mt-2 font-serif text-5xl">Men</h3>
+              <span className="mt-4 border-b border-white/80 pb-1 text-xs tracking-[0.2em] uppercase">
+                Explore
+              </span>
+            </div>
+          </Link>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      <section className="bg-[#1c1917] px-4 py-20 text-[var(--card)] sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-3">
+          {[
+            {
+              title: "Considered fabrics",
+              copy: "Silk, merino, linen, and Italian wool — dummy copy, real-feeling materials.",
+            },
+            {
+              title: "Ships in 2 days",
+              copy: "Complimentary delivery on orders over $150. Easy 30-day returns.",
+            },
+            {
+              title: "Made to last",
+              copy: "Fewer pieces, better cuts. A wardrobe that does not expire with the trend.",
+            },
+          ].map((item, i) => (
+            <div
+              key={item.title}
+              className="animate-fade-up border-t border-white/15 pt-6"
+              style={{ animationDelay: `${i * 0.12}s` }}
+            >
+              <h3 className="font-serif text-3xl">{item.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-white/70">{item.copy}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
